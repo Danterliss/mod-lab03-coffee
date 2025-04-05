@@ -89,7 +89,7 @@ TEST_F(AutomataTest, CantInsertCoinWhenOff) {
 
 TEST_F(AutomataTest, CheckMoneyCorrectly) {
     atm.coin(40);
-    EXPECT_FALSE(atm.check(2)); 
+    EXPECT_FALSE(atm.testCheck(2));
     atm.coin(10);
-    EXPECT_TRUE(atm.check(2));  
+    EXPECT_TRUE(atm.testCheck(2));
 }
