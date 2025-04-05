@@ -84,7 +84,7 @@ bool Automata::check(unsigned int choice) {
     if (choice >= prices.size()) {
         throw std::out_of_range("Неверный выбор напитка");
     }
-    return cash >= prices[choice];
+    return cash >= prices[choice - 1];
 }
 
 void Automata::cook() {
@@ -99,6 +99,5 @@ void Automata::cook() {
 
 void Automata::finish() {
     std::cout << "Напиток готов! Заберите ваш заказ.\n";
-    cash = 0;
     state = STATES::WAIT;
 }

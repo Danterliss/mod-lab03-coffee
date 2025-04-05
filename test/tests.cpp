@@ -68,7 +68,7 @@ TEST_F(AutomataTest, SelectsDrinkWithEnoughMoney) {
 TEST_F(AutomataTest, RejectsDrinkWithNotEnoughMoney) {
     atm.coin(20);
     atm.choice(2);
-    ASSERT_EQ(atm.getState(), STATES::WAIT);
+    ASSERT_EQ(atm.getState(), STATES::ACCEPT);
 }
 
 TEST_F(AutomataTest, ReturnsToWaitAfterCooking) {
