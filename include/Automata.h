@@ -1,5 +1,6 @@
-#ifndef AUTOMATA_H
-#define AUTOMATA_H
+// Copyright 2022 UNN-IASR
+#ifndef INCLUDE_AUTOMATA_H_
+#define INCLUDE_AUTOMATA_H_
 
 #include <vector>
 #include <string>
@@ -15,7 +16,7 @@ enum class STATES {
 
 class Automata {
     friend class AutomataTest;
-private:
+ private:
     unsigned int cash;
     std::vector<std::string> menu;
     std::vector<unsigned int> prices;
@@ -25,7 +26,7 @@ private:
     void cook();
     void finish();
 
-public:
+ public:
     Automata();
 
     void on();
@@ -37,4 +38,4 @@ public:
     unsigned int cancel();
 };
 
-#endif
+#endif // INCLUDE_AUTOMATA_H_

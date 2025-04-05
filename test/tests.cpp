@@ -4,7 +4,7 @@
 #include "Automata.h"
 
 class AutomataTest : public ::testing::Test {
-protected:
+ protected:
     Automata atm;
 
     void SetUp() override {
