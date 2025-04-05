@@ -60,8 +60,9 @@ TEST_F(AutomataTest, CancelReturnsMoney) {
 
 TEST_F(AutomataTest, SelectsDrinkWithEnoughMoney) {
     atm.coin(100);
-    ASSERT_NO_THROW(atm.choice(1));
-    ASSERT_EQ(atm.getState(), STATES::WAIT);
+    atm.choice(1);
+    EXPECT_EQ(atm.getState(), STATES::WAIT);
+    EXPECT_EQ(atm.cancel(), 70);
 }
 
 TEST_F(AutomataTest, RejectsDrinkWithNotEnoughMoney) {
@@ -73,22 +74,22 @@ TEST_F(AutomataTest, RejectsDrinkWithNotEnoughMoney) {
 TEST_F(AutomataTest, ReturnsToWaitAfterCooking) {
     atm.coin(100);
     atm.choice(1);
-    ASSERT_EQ(atm.getState(), STATES::WAIT);
+    EXPECT_EQ(atm.getState(), STATES::WAIT);
 }
 
 TEST_F(AutomataTest, CantSelectWhenOff) {
     atm.off();
-    ASSERT_THROW(atm.choice(1), std::runtime_error);
+    EXPECT_THROW(atm.choice(1), std::runtime_error);
 }
 
 TEST_F(AutomataTest, CantInsertCoinWhenOff) {
     atm.off();
-    ASSERT_THROW(atm.coin(50), std::runtime_error);
+    EXPECT_THROW(atm.coin(50), std::runtime_error);
 }
 
 TEST_F(AutomataTest, CheckMoneyCorrectly) {
     atm.coin(40);
-    ASSERT_FALSE(testCheck(2));
+    EXPECT_FALSE(atm.check(2)); 
     atm.coin(10);
-    ASSERT_TRUE(testCheck(2));
+    EXPECT_TRUE(atm.check(2));  
 }

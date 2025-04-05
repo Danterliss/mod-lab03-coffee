@@ -25,6 +25,9 @@ void Automata::off() {
 }
 
 void Automata::coin(unsigned int amount) {
+    if (state == STATES::OFF) {
+        throw std::runtime_error("Автомат выключен");
+    }
     if (state == STATES::WAIT || state == STATES::ACCEPT) {
         cash += amount;
         state = STATES::ACCEPT;
@@ -47,15 +50,21 @@ STATES Automata::getState() const {
 }
 
 void Automata::choice(unsigned int drinkIdx) {
-    if (state == STATES::ACCEPT) {
-        if (drinkIdx > 0 && drinkIdx <= menu.size()) {
-            state = STATES::CHECK;
-            if (check(drinkIdx - 1)) {
-                cook();
-            }
-            else {
-                state = STATES::WAIT;
-            }
+    std::cout << "Current state: " << static_cast<int>(state) << std::endl;
+    if(state != STATES::ACCEPT) {
+        throw std::runtime_error("Нельзя выбрать напиток в текущем состоянии");
+        return;
+    }
+
+    if (drinkIdx > 0 && drinkIdx <= menu.size()) {
+        state = STATES::CHECK;
+        if (check(drinkIdx - 1)) {
+            cash -= prices[drinkIdx - 1]; 
+            cook();
+            finish();
+        }
+        else {
+            state = STATES::ACCEPT;
         }
     }
 }
@@ -72,10 +81,10 @@ unsigned int Automata::cancel() {
 }
 
 bool Automata::check(unsigned int choice) {
-    if (choice < prices.size()) {
-        return cash >= prices[choice];
+    if (choice >= prices.size()) {
+        throw std::out_of_range("Неверный выбор напитка");
     }
-    return false;
+    return cash >= prices[choice];
 }
 
 void Automata::cook() {
