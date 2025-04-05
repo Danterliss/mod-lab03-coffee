@@ -13,6 +13,7 @@ enum class STATES {
 };
 
 class Automata {
+    friend class AutomataTest;
 private:
     unsigned int cash;
     std::vector<std::string> menu;
