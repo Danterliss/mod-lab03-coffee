@@ -55,14 +55,14 @@ STATES Automata::getState() const {
 void Automata::choice(unsigned int drinkIdx) {
     std::cout << "Current state: " << static_cast<int>(state) << std::endl;
     if (state != STATES::ACCEPT) {
-        throw std::runtime_error("You cannot select a drink in the current state.");
+        throw std::runtime_error("You can't choose a drink.");
         return;
     }
 
     if (drinkIdx > 0 && drinkIdx <= menu.size()) {
         state = STATES::CHECK;
         if (check(drinkIdx - 1)) {
-            cash -= prices[drinkIdx - 1]; 
+            cash -= prices[drinkIdx - 1];
             cook();
             finish();
         } else {
@@ -76,7 +76,8 @@ unsigned int Automata::cancel() {
         unsigned int refund = cash;
         cash = 0;
         state = STATES::WAIT;
-        std::cout << "The operation was canceled. Returned: " << refund << " coins.\n";
+        std::cout << "The operation was canceled. Returned: "
+            << refund << " coins.\n";
         return refund;
     }
     return 0;

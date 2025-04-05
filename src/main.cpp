@@ -4,7 +4,6 @@
 #include "Automata.h"
 
 int main() {
-
     std::cout << "=== Demonstration of the machine's operation ===\n\n";
 
     Automata automata;
