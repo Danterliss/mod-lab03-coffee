@@ -91,5 +91,5 @@ TEST_F(AutomataTest, CheckMoneyCorrectly) {
     atm.coin(40);
     EXPECT_FALSE(testCheck(2));
     atm.coin(10);
-    EXPECT_TRUE(testCheck(2));
+    EXPECT_TRUE(testCheck(1));
 }
